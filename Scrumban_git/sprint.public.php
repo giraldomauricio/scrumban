@@ -27,7 +27,7 @@ if($_GET["team"]){
     $teamName = "Team ".$team->get_team_name();
 }
 ?>
-<div class="well well-small"><h3><?=$teamName?> : Sprint <?=$status["sprint"]?></h3></div>
+<div class="alert alert-success"><h4><?=$teamName?> : Sprint <?=$status["sprint"]?> <a href="<?=  str_replace("load=sprint", "load=sprint.print", $_SERVER["REQUEST_URI"])?>" class="btn btn-small btn-info"><i class="icon-print icon-white"></i> View print version</a></h4></div>
 <div class="row">
   <div class="span3"><h2>Project</h2></div>
   <div class="span3"><h2>Backlog</h2></div>
