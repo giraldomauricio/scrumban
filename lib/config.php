@@ -18,7 +18,7 @@ $upload_folder = "files/";
 $appFolder = "/stg/";
 $fromMail = "no-reply@bymurdock.com";
 
-$portalName = "SCRUMBAN v.1.2";
+$portalName = "ScrumTasks SCRUMBAN v.1.2";
 
 define("PORTAL_NAME", $portalName);
 define("PORTAL_URL", "http://www.bymurdock.com/scrumban/");
