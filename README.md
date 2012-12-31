@@ -1,4 +1,4 @@
 scrumban
 ========
 
-PHP/MySQL SCRUM/Kanban Tracking Tool
+PHP/MySQL SCRUM/Kanban Tracking Tool with GitHub support
