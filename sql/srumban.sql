@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Dec 28, 2012 at 02:02 PM
+-- Generation Time: Dec 31, 2012 at 10:37 AM
 -- Server version: 5.0.37
 -- PHP Version: 4.4.7
 -- 
@@ -24,7 +24,7 @@ CREATE TABLE `main_logs` (
   `log_date` date NOT NULL,
   PRIMARY KEY  (`log_id`),
   KEY `log_task` (`log_task`,`log_user`,`log_state`,`log_date`)
-) ENGINE=MyISAM AUTO_INCREMENT=160 DEFAULT CHARSET=latin1 AUTO_INCREMENT=160 ;
+) ENGINE=MyISAM AUTO_INCREMENT=161 DEFAULT CHARSET=latin1 AUTO_INCREMENT=161 ;
 
 -- --------------------------------------------------------
 
@@ -37,9 +37,12 @@ CREATE TABLE `main_projects` (
   `pro_name` varchar(100) NOT NULL,
   `pro_status` int(1) NOT NULL default '1',
   `pro_team` int(9) NOT NULL default '1',
+  `pro_github_name` varchar(100) NOT NULL,
+  `pro_github_user` int(9) NOT NULL,
   PRIMARY KEY  (`pro_id`),
   KEY `pro_name` (`pro_name`,`pro_status`),
-  KEY `pro_team` (`pro_team`)
+  KEY `pro_team` (`pro_team`),
+  KEY `pro_github_user` (`pro_github_user`)
 ) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 -- --------------------------------------------------------
@@ -73,9 +76,11 @@ CREATE TABLE `main_tasks` (
   `task_units` int(9) NOT NULL,
   `task_title` varchar(100) NOT NULL,
   `task_detail` text NOT NULL,
+  `task_github_issue` int(9) NOT NULL,
   PRIMARY KEY  (`task_id`),
   KEY `task_project` (`task_project`,`task_user`,`task_state`,`task_units`,`task_title`),
-  KEY `task_sprint` (`task_sprint`)
+  KEY `task_sprint` (`task_sprint`),
+  KEY `task_github_issue` (`task_github_issue`)
 ) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 -- --------------------------------------------------------
@@ -109,7 +114,9 @@ CREATE TABLE `main_users` (
   `use_name` varchar(100) NOT NULL,
   `use_team` int(9) NOT NULL default '1',
   `use_pushover` varchar(100) NOT NULL,
+  `use_github_user` varchar(100) NOT NULL,
   PRIMARY KEY  (`use_id`),
   KEY `use_email` (`use_email`,`use_password`,`use_key`),
-  KEY `use_team` (`use_team`)
+  KEY `use_team` (`use_team`),
+  KEY `use_github_user` (`use_github_user`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
