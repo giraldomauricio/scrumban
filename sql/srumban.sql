@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Dec 31, 2012 at 10:37 AM
+-- Generation Time: Dec 31, 2012 at 10:52 AM
 -- Server version: 5.0.37
 -- PHP Version: 4.4.7
 -- 
@@ -37,7 +37,7 @@ CREATE TABLE `main_projects` (
   `pro_name` varchar(100) NOT NULL,
   `pro_status` int(1) NOT NULL default '1',
   `pro_team` int(9) NOT NULL default '1',
-  `pro_github_name` varchar(100) NOT NULL,
+  `pro_github_repo` varchar(100) NOT NULL,
   `pro_github_user` int(9) NOT NULL,
   PRIMARY KEY  (`pro_id`),
   KEY `pro_name` (`pro_name`,`pro_status`),

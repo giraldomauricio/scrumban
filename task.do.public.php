@@ -117,6 +117,11 @@ $db_main_projects->load();
     </tr>
     
     <tr>
+      <td>GitHub Issue</td>
+      <td><input type="checkbox" id="github_issue" name="github_issue" <? if($db_main_tasks->get_task_github_issue() != "") print "checked=\"checked\"";?>> <?=$db_main_tasks->get_task_github_issue();?></td>
+    </tr>
+    
+    <tr>
       <td> </td>
       <td>
 <?

@@ -17,6 +17,8 @@ class main_projects extends conDb{
 	var $pro_name;
 	var $pro_status;
         var $pro_team;
+        var $pro_github_repo;
+        var $pro_github_user;
 	// ######################################################################
 	// Class specific variables
 	// ######################################################################

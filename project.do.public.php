@@ -68,6 +68,20 @@ if ($_GET["do"]=="edit" || $_GET["do"]=="delete"){
         </td>
     </tr>
     <tr>
+      <td>GitHub Repository</td>
+      <td><input name="pro_github_repo" type="text" id="pro_github_repo" value="<?=$db_main_projects->get_pro_github_repo();?>" maxlength="100"> (Optional)</td>
+    </tr>
+    <tr>
+      <td>GitHub Repo User</td>
+      <td>
+          <?
+        $users = new main_users();
+        $users->getAllGitHubUsers();
+        print $users->dropdown("pro_github_user", "use_id", "use_name", $db_main_projects->get_pro_github_user());
+        ?> (Optional)
+      </td>
+    </tr>
+    <tr>
       <td> </td>
       <td>
 <?

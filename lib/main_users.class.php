@@ -20,6 +20,7 @@ class main_users extends conDb{
 	var $use_name;
         var $use_team;
         var $use_pushover;
+        var $use_github_user;
 	// ######################################################################
 	// Class specific variables
 	// ######################################################################
@@ -42,6 +43,12 @@ class main_users extends conDb{
     public function getAllUsers()
     {
         $this->sql = "SELECT *, (SELECT COUNT(*) FROM main_tasks WHERE task_user = use_id AND task_state = 1) AS wip_tasks, (SELECT SUM(task_units) FROM main_tasks WHERE task_user = use_id AND task_state = 1) AS wip_load FROM main_users, main_teams WHERE use_team = team_id";
+        $this->query();
+    }
+    
+    public function getAllGitHubUsers()
+    {
+        $this->sql = "SELECT * FROM main_users WHERE use_github_user <> ''";
         $this->query();
     }
 }

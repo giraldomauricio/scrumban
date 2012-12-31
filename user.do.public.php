@@ -87,7 +87,11 @@ if($_GET["sendKey"])
         ?>
     <tr>
       <td>Pushover Key</td>
-      <td><input name="use_pushover" type="text" id="use_pushover" value="<?=$db_main_users->get_use_pushover();?>" maxlength="100"></td>
+      <td><input name="use_pushover" type="text" id="use_pushover" value="<?=$db_main_users->get_use_pushover();?>" maxlength="100"> (Optional)</td>
+    </tr>
+    <tr>
+      <td>GitHub User</td>
+      <td><input name="use_github_user" type="text" id="use_github_user" value="<?=$db_main_users->get_use_github_user();?>" maxlength="100"> (Optional)</td>
     </tr>
     <tr>
       <td>Key</td>
