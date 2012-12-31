@@ -22,6 +22,7 @@ class main_tasks extends conDb{
 	var $task_title;
 	var $task_detail;
         var $task_github_issue;
+        var $task_found_work;
 	// ######################################################################
 	// Class specific variables
 	// ######################################################################

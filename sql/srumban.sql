@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Dec 31, 2012 at 10:52 AM
+-- Generation Time: Dec 31, 2012 at 12:12 PM
 -- Server version: 5.0.37
 -- PHP Version: 4.4.7
 -- 
@@ -43,7 +43,7 @@ CREATE TABLE `main_projects` (
   KEY `pro_name` (`pro_name`,`pro_status`),
   KEY `pro_team` (`pro_team`),
   KEY `pro_github_user` (`pro_github_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ CREATE TABLE `main_sprints` (
   `sprint_status` int(11) default NULL,
   PRIMARY KEY  (`sprint_id`),
   KEY `sprint_project` (`sprint_project`,`sprint_start`,`sprint_end`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -76,11 +76,13 @@ CREATE TABLE `main_tasks` (
   `task_units` int(9) NOT NULL,
   `task_title` varchar(100) NOT NULL,
   `task_detail` text NOT NULL,
+  `task_found_work` int(1) NOT NULL default '0',
   `task_github_issue` int(9) NOT NULL,
   PRIMARY KEY  (`task_id`),
   KEY `task_project` (`task_project`,`task_user`,`task_state`,`task_units`,`task_title`),
   KEY `task_sprint` (`task_sprint`),
-  KEY `task_github_issue` (`task_github_issue`)
+  KEY `task_github_issue` (`task_github_issue`),
+  KEY `task_found_work` (`task_found_work`)
 ) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 -- --------------------------------------------------------

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Library to support basic GitHub API commands
+ * Library to support basic GitHub API commands using curl
  *
  * @author mgiraldo
  * @uses:
