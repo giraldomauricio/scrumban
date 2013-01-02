@@ -25,7 +25,7 @@ define("SECURE", false);
 define("LOG", true);
 define("VERBOSE", false);
 define("VISUAL_ERRORS", false);
-define("ROOT","/Library/WebServer/Documents/scrumban/");
+define("ROOT"," /home/bionet/www/scrumban/");
 
 if ($_SERVER['HTTPS'] != "on" && SECURE) {
     $redirect = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
