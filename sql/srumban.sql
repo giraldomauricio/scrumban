@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Dec 31, 2012 at 12:12 PM
+-- Generation Time: Jan 03, 2013 at 03:57 PM
 -- Server version: 5.0.37
 -- PHP Version: 4.4.7
 -- 
@@ -11,6 +11,53 @@
 -- 
 
 -- --------------------------------------------------------
+
+-- 
+-- Table structure for table `customer_projects`
+-- 
+
+CREATE TABLE `customer_projects` (
+  `cp_customer` int(9) NOT NULL,
+  `cp_project` int(9) NOT NULL,
+  KEY `cp_customer` (`cp_customer`,`cp_project`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- 
+-- Table structure for table `customer_teams`
+-- 
+
+CREATE TABLE `customer_teams` (
+  `ct_customer` int(9) NOT NULL,
+  `ct_team` int(9) NOT NULL,
+  KEY `ct_customer` (`ct_customer`,`ct_team`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- 
+-- Table structure for table `customer_users`
+-- 
+
+CREATE TABLE `customer_users` (
+  `cu_customer` int(9) NOT NULL,
+  `cu_user` int(9) NOT NULL,
+  KEY `cu_customer` (`cu_customer`,`cu_user`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- 
+-- Table structure for table `main_customers`
+-- 
+
+CREATE TABLE `main_customers` (
+  `cust_id` int(9) NOT NULL auto_increment,
+  `cust_status` int(1) NOT NULL default '0',
+  `cust_name` varchar(100) NOT NULL,
+  `cust_owner` int(9) NOT NULL default '1',
+  PRIMARY KEY  (`cust_id`),
+  KEY `cust_status` (`cust_status`,`cust_owner`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 
 -- 
 -- Table structure for table `main_logs`
@@ -24,9 +71,9 @@ CREATE TABLE `main_logs` (
   `log_date` date NOT NULL,
   PRIMARY KEY  (`log_id`),
   KEY `log_task` (`log_task`,`log_user`,`log_state`,`log_date`)
-) ENGINE=MyISAM AUTO_INCREMENT=161 DEFAULT CHARSET=latin1 AUTO_INCREMENT=161 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
 
--- --------------------------------------------------------
+
 
 -- 
 -- Table structure for table `main_projects`
@@ -43,9 +90,9 @@ CREATE TABLE `main_projects` (
   KEY `pro_name` (`pro_name`,`pro_status`),
   KEY `pro_team` (`pro_team`),
   KEY `pro_github_user` (`pro_github_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
--- --------------------------------------------------------
+
 
 -- 
 -- Table structure for table `main_sprints`
@@ -59,7 +106,9 @@ CREATE TABLE `main_sprints` (
   `sprint_status` int(11) default NULL,
   PRIMARY KEY  (`sprint_id`),
   KEY `sprint_project` (`sprint_project`,`sprint_start`,`sprint_end`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+
 
 -- --------------------------------------------------------
 
@@ -83,7 +132,8 @@ CREATE TABLE `main_tasks` (
   KEY `task_sprint` (`task_sprint`),
   KEY `task_github_issue` (`task_github_issue`),
   KEY `task_found_work` (`task_found_work`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
+
 
 -- --------------------------------------------------------
 
@@ -100,7 +150,13 @@ CREATE TABLE `main_teams` (
   KEY `team_name` (`team_name`),
   KEY `team_leader` (`team_leader`),
   KEY `team_notify` (`team_notify`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- 
+-- Dumping data for table `main_teams`
+-- 
+
+INSERT INTO `main_teams` VALUES (1, 'No Team', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -121,4 +177,10 @@ CREATE TABLE `main_users` (
   KEY `use_email` (`use_email`,`use_password`,`use_key`),
   KEY `use_team` (`use_team`),
   KEY `use_github_user` (`use_github_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+-- 
+-- Dumping data for table `main_users`
+-- 
+
+INSERT INTO `main_users` VALUES (1, 'None', 'None', '0', 'None', 1, '', '');
