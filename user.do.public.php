@@ -44,6 +44,10 @@ if($_GET["sendKey"])
   $mail->subject = "Scrumban access key";
   $mail->message($message);
 }
+$validation = new validations();
+$validation->fields = array("use_name"=>"Please type the name", "use_email"=>"Please type the password", "use_password"=>"Please type the password");
+$validation->basicValidations();
+print $validation->html;
 ?>
 
 <ul class="breadcrumb">
@@ -53,7 +57,7 @@ if($_GET["sendKey"])
         </ul>
 
 <script language="javascript" src="js/main.js"></script>
-<form action="index.php?load=user.do" method="post" name="do_main_users" id="do_main_users" onSubmit="return validate_types(this);">
+<form action="index.php?load=user.do" method="post" name="do_main_users" id="do_main_users" <?=$validation->formCall?>>
   <table width="100%"  border="0" cellspacing="1" cellpadding="1" class="table table-striped table-bordered">
     <tr>
       <td>Name</td>
