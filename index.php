@@ -138,9 +138,12 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
         <?
         if($_SESSION["sandbox"] == "true")
         {
+            include "shaversion.php";
         ?>
         <div class="alert alert-block">
             <h4>Running in Sandbox Mode</h4>
+            Deploy this version to production: <a href="deploy.php" class="btn btn-small btn-danger">deploy</a>
+            Go to the latest release: <a href="<?=$shaversion?>" class="btn btn-small btn-info">go</a>
         </div>
         <?
         }
