@@ -100,10 +100,10 @@ class github {
                 print "Moving ".$branch." to ".$sha."<br />";
                 rename("/home/bionet/www/scrumban/git_repos/".$sha."/".$branch, "/home/bionet/www/scrumban/".$sha);
                 
-                $filename = "/home/bionet/www/scrumban/version.php";
-                $version = "<"."? $"."version = \"".$sha."\";?".">";
+                $filename = "/home/bionet/www/scrumban/shaversion.php";
+                $shaversion = "<"."? $"."version = \"".$sha."\";?".">";
                 $handle = fopen($filename, "w");
-                fwrite($handle, $version);
+                fwrite($handle, $shaversion);
                 print "New version written <br />";
             }
             
