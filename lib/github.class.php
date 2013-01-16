@@ -48,19 +48,14 @@ class github {
         curl_close($ch);
     }
 
-    public function downloadRepository($branch) {
+    public function downloadAndDeployRepository($branch) {
 
         $url = $this->git . $this->owner . "/" . $this->repo . "/archive/" . $branch . ".zip";
 
-        $path1 = ROOT . "git_repos/" . $branch . ".zip";
-
         //$url  = 'https://github.com/giraldomauricio/scrumban/archive/master.zip';
 
+        $path = ROOT."git_repos/temp.zip";
 
-
-        $path = '/home/bionet/www/scrumban/git_repos/test3.zip';
-
-        print $path1 . "<br />";
         print $path . "<br />";
 
         $fp = fopen($path, 'w');
@@ -85,9 +80,9 @@ class github {
         $res = $zip->open($path);
         if ($res === TRUE) {
             print "Extracting to ".$sha."<br />";
-            $zip->extractTo("/home/bionet/www/scrumban/git_repos/".$sha);
+            $zip->extractTo(ROOT."git_repos/".$sha);
             $zip->close();
-            $dir = dir("/home/bionet/www/scrumban/git_repos/".$sha);
+            $dir = dir(ROOT."git_repos/".$sha);
             $branch = "";
             while (($file = $dir->read())) {
                 if (substr($file, 0, 1) != ".") {
@@ -98,17 +93,17 @@ class github {
             if($branch != "")
             {
                 print "Moving ".$branch." to ".$sha."<br />";
-                rename("/home/bionet/www/scrumban/git_repos/".$sha."/".$branch, "/home/bionet/www/scrumban/".$sha);
+                rename(ROOT."git_repos/".$sha."/".$branch, ROOT.$sha);
                 
-                $filename = "/home/bionet/www/scrumban/shaversion.php";
-                $shaversion = "<"."? $"."version = \"".$sha."\";?".">";
+                $filename = ROOT."shaversion.php";
+                $shaversion = "<"."? $"."shaversion = \"".$sha."\";?".">";
                 $handle = fopen($filename, "w");
                 fwrite($handle, $shaversion);
                 print "New version written <br />";
             }
             
         } else {
-            echo 'doh!';
+            echo 'Error expanding GIT Repository';
         }
 
 

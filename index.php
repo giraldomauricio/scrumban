@@ -4,7 +4,7 @@ if(file_exists("shaversion.php"))
     include("shaversion.php");
     if($shaversion != "" and file_exists($shaversion)) header ("Location: ".$shaversion);
 }
-if(file_exists("../shaversion.php")) include "shaversion.php";
+if(file_exists("../shaversion.php")) include "../shaversion.php";
 include("framework.php");
 if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
 ?>
@@ -125,6 +125,14 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
 
       <hr>
 
+        <?
+        if(!strpos($_SERVER["SCRIPT_URL"], $shaversion)){
+        ?>
+            <div class="alert alert-error">You are not using the most recent release of <?=$portalName?></div>
+        <?
+        }
+        ?>
+      
       <div class="footer">
         <p>&copy; <?=$portalName?> <?=date("Y")?> sha <?=$shaversion?></p>
       </div>
@@ -165,6 +173,8 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
  }
  
  ?>
-    
+ <?
+ if(!strpos($_SERVER["SCRIPT_URL"], $shaversion)) print "Version not current";
+ ?>  
 </body>
 </html>
