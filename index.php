@@ -144,6 +144,7 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
             <h4>Running in Sandbox Mode</h4>
             Deploy this version to production: <a href="deploy.php" class="btn btn-small btn-danger">deploy</a>
             Go to the latest release: <a href="<?=$shaversion?>" class="btn btn-small btn-info">go</a>
+            Turn off Sandbox Mode: <a href="index.php?sandbox=false" class="btn btn-small btn-info">turn off</a>
         </div>
         <?
         }
