@@ -1,11 +1,13 @@
 <?
-if(file_exists("shaversion.php"))
+include("framework.php");
+if($_GET["sandbox"]) $_SESSION["sandbox"] = $_GET["sandbox"];
+if(file_exists("shaversion.php") && $_SESSION["sandbox"] != "true")
 {
     include("shaversion.php");
     if($shaversion != "" and file_exists($shaversion)) header ("Location: ".$shaversion);
 }
 if(file_exists("../shaversion.php")) include "../shaversion.php";
-include("framework.php");
+
 if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
 ?>
 <!DOCTYPE html>
@@ -128,11 +130,22 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
         <?
         if(!strpos($_SERVER["SCRIPT_URL"], $shaversion)){
         ?>
-            <div class="alert alert-error">You are not using the most recent release of <?=$portalName?></div>
+            <div class="alert alert-error">You are not using the most recent release of <?=$portalName?>. Last release is available <a href="../<?=$shaversion?>">here</a>.</div>
         <?
         }
         ?>
       
+        <?
+        if($_SESSION["sandbox"] == "true")
+        {
+        ?>
+        <div class="alert alert-block">
+            <h4>Running in Sandbox Mode</h4>
+        </div>
+        <?
+        }
+        ?>  
+            
       <div class="footer">
         <p>&copy; <?=$portalName?> <?=date("Y")?> sha <?=$shaversion?></p>
       </div>
@@ -172,9 +185,6 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
   
  }
  
- ?>
- <?
- if(!strpos($_SERVER["SCRIPT_URL"], $shaversion)) print "Version not current";
  ?>  
 </body>
 </html>

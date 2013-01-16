@@ -1,1 +1,1 @@
-<h3>Welcome to Scrumban 1.0</h3>
+<h3>Welcome to <?=$portalName?></h3>
