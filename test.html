@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <form id="testForm" name="testForm" action="test.html" method="POST">
+            <input type="text" id="testInput1" name="testInput1" data-required="true" data-type="text" data-message="Please type this field" /><div id="alert_testInput1"></div>
+            <input type="text" id="testInput2" name="testInput2" data-required="false" data-type="numeric" />
+            <input type="button" onclick="validate('testForm')"/>
+        </form>
+        <div>TODO write content</div>
+    </body>
+    <script>
+        function validate(formName)
+        {
+            var form = document.getElementById(formName);
+            var elem = form.elements;
+            var err = "";
+            for(var i = 0; i < elem.length; i++)
+            {
+                try{
+                    if(elem[i].getAttribute("data-required")=="true" && elem[i].value == "")
+                    {
+                        err += elem[i].getAttribute("data-message") + "\n";
+                        elem[i].style.backgroundColor = "#FF0000";
+                        document.getElementById("alert_" + elem[i].name).innerHTML = elem[i].getAttribute("data-message");
+                    }
+                    else
+                    {
+                        elem[i].style.backgroundColor = "";
+                        document.getElementById("alert_" + elem[i].name).innerHTML = "";
+                    }    
+                }
+                catch(e)
+                {
+                    
+                }
+                
+            }
+            
+            if(err != "") alert(err);
+            //alert(form.testInput.getAttribute("data-validation"));
+        }
+    </script>
+</html>

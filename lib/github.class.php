@@ -18,6 +18,7 @@ class github {
     var $repo = "";
     var $uri = "https://api.github.com/";
     var $git = "https://github.com/";
+    var $url = "";
     var $app = "repos/";
     var $action = "";
     var $obj;
@@ -34,11 +35,12 @@ class github {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_URL, $this->uri . $this->app . $this->owner . "/" . $this->repo);
+        if($this->url == "") $this->url = $this->uri . $this->app . $this->owner . "/" . $this->repo;
+        curl_setopt($ch, CURLOPT_URL, $this->url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "/" . $this->action);
+        if($this->action != "") curl_setopt($ch, CURLOPT_POSTFIELDS, "/" . $this->action);
         $this->raw = curl_exec($ch);
         $this->obj = json_decode($this->raw);
         curl_close($ch);
@@ -51,14 +53,14 @@ class github {
         $path1 = ROOT . "git_repos/" . $branch . ".zip";
 
         //$url  = 'https://github.com/giraldomauricio/scrumban/archive/master.zip';
-        
-        
-        
+
+
+
         $path = '/home/bionet/www/scrumban/git_repos/test3.zip';
-        
-        print $path1."<br />";
-        print $path."<br />";
-        
+
+        print $path1 . "<br />";
+        print $path . "<br />";
+
         $fp = fopen($path, 'w');
 
         $ch = curl_init($url);
@@ -73,11 +75,27 @@ class github {
         curl_close($ch);
         fclose($fp);
 
+        $zip = new ZipArchive;
+        $res = $zip->open($path);
+        if ($res === TRUE) {
+            $zip->extractTo('/home/bionet/www/scrumban/git_repos/temp');
+            $zip->close();
+            echo 'woot!';
+        } else {
+            echo 'doh!';
+        }
+
+
         print_r(error_get_last());
     }
 
     public function getIssues() {
         $this->action = "issues";
+        $this->loadJson();
+    }
+    
+    public function load() {
+        $this->url = "repos/".  $this->owner."/".  $this->repo."/keys";
         $this->loadJson();
     }
 
