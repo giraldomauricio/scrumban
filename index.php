@@ -1,4 +1,10 @@
 <?
+if(file_exists("version.php"))
+{
+    include("version.php");
+    if($version != "" and file_exists($version)) header ("Location: ".$version);
+}
+if(file_exists("../version.php")) include "version.php";
 include("framework.php");
 if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
 ?>
@@ -120,7 +126,7 @@ if($_GET["key"]) $_SESSION["key"] = $_GET["key"];
       <hr>
 
       <div class="footer">
-        <p>&copy; <?=$portalName?> <?=date("Y")?></p>
+        <p>&copy; <?=$portalName?> <?=date("Y")?> sha <?=$version?></p>
       </div>
 
     </div> <!-- /container -->

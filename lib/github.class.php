@@ -35,12 +35,14 @@ class github {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        if($this->url == "") $this->url = $this->uri . $this->app . $this->owner . "/" . $this->repo;
+        if ($this->url == "")
+            $this->url = $this->uri . $this->app . $this->owner . "/" . $this->repo;
         curl_setopt($ch, CURLOPT_URL, $this->url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        if($this->action != "") curl_setopt($ch, CURLOPT_POSTFIELDS, "/" . $this->action);
+        if ($this->action != "")
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "/" . $this->action);
         $this->raw = curl_exec($ch);
         $this->obj = json_decode($this->raw);
         curl_close($ch);
@@ -75,12 +77,36 @@ class github {
         curl_close($ch);
         fclose($fp);
 
+        $sha = $this->loadLastCommitSha();
+
+        print "Saving to ".$sha."<br />";
+        
         $zip = new ZipArchive;
         $res = $zip->open($path);
         if ($res === TRUE) {
-            $zip->extractTo('/home/bionet/www/scrumban/git_repos/temp');
+            print "Extracting to ".$sha."<br />";
+            $zip->extractTo("/home/bionet/www/scrumban/git_repos/".$sha);
             $zip->close();
-            echo 'woot!';
+            $dir = dir("/home/bionet/www/scrumban/git_repos/".$sha);
+            $branch = "";
+            while (($file = $dir->read())) {
+                if (substr($file, 0, 1) != ".") {
+                    $branch = $file;
+                    break;
+                }
+            }
+            if($branch != "")
+            {
+                print "Moving ".$branch." to ".$sha."<br />";
+                rename("/home/bionet/www/scrumban/git_repos/".$sha."/".$branch, "/home/bionet/www/scrumban/".$sha);
+                
+                $filename = "/home/bionet/www/scrumban/version.php";
+                $version = "<"."? $"."version = \"".$sha."\";?".">";
+                $handle = fopen($filename, "w");
+                fwrite($handle, $version);
+                print "New version written <br />";
+            }
+            
         } else {
             echo 'doh!';
         }
@@ -93,10 +119,11 @@ class github {
         $this->action = "issues";
         $this->loadJson();
     }
-    
-    public function load() {
-        $this->url = "repos/".  $this->owner."/".  $this->repo."/keys";
+
+    public function loadLastCommitSha() {
+        $this->url = $this->uri . "repos/" . $this->owner . "/" . $this->repo . "/commits";
         $this->loadJson();
+        return $this->obj[0]->sha;
     }
 
 }
