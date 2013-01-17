@@ -63,9 +63,9 @@ while($projects->load())
       <!--Sprint change-->
       <div class="btn-group">
           
-          <a href="index.php?load=sprint&wip=<?=$tasks->get_task_id()?>&team=<?=$_GET["team"]?>&project=<?=$_GET["project"]?>" class="btn btn-small btn-info">Move to WIP</a>
+          <a href="index.php?load=sprint&wip=<?=$tasks->get_task_id()?>&team=<?=$_GET["team"]?>&project=<?=$_GET["project"]?>" class="btn btn-small btn-primary">Move to WIP</a>
           
-                <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">Transfer<span class="caret"></span></button>
+                <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">Transfer<span class="caret"></span></button>
                 <ul class="dropdown-menu">
                   <?
                     $db_main_sprints = new main_sprints();
@@ -101,7 +101,7 @@ while($projects->load())
           
           <a href="index.php?load=sprint&finish=<?=$tasks->get_task_id()?>&team=<?=$_GET["team"]?>&project=<?=$_GET["project"]?>" class="btn btn-small btn-success">Done</a>
       
-          <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">Transfer<span class="caret"></span></button>
+          <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">Transfer<span class="caret"></span></button>
                 <ul class="dropdown-menu">
                   <?
                     $db_main_sprints = new main_sprints();
