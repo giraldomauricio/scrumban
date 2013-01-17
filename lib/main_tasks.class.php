@@ -115,5 +115,16 @@ class main_tasks extends conDb{
       $push = new pushover();
       $push->notifyLeader($task, "Task moved to WIP");
     }
+    
+    public function moveToSprint($move, $to)
+    {
+      $this->sql = "UPDATE main_tasks SET task_sprint = ".$to." WHERE task_id = ".$move;
+      $this->query();
+      $push = new pushover();
+      $push->notifyLeader($move, "Task moved to a different Sprint.");
+    }
+    
+    
+    
 }
 ?>
