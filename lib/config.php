@@ -1,14 +1,14 @@
 <?
 // Configuration File
 // Portal Builder 3.0
-// (R) 2005-2012
+// (R) 2005-2013
 // Software version
-$version = 1;
+$version = 2;
 // Database information
-$dbserver = "localhost";
-$dbuser = "bionet";
-$dbpass = "hOOters";
-$dbname = "scrumban";
+$dbserver = "scrumtasksdb.db.10352174.hostedresource.com";
+$dbuser = "scrumtasksdb";
+$dbpass = "Scrum2013!";
+$dbname = "scrumtasksdb";
 // Global variables
 global $res_pag;
 $res_pag = 30;
@@ -18,10 +18,10 @@ $upload_folder = "files/";
 $appFolder = "/stg/";
 $fromMail = "no-reply@bymurdock.com";
 
-$portalName = "ScrumTasks SCRUMBAN v.1.2";
+$portalName = "ScrumTasks v.1.2";
 
 define("PORTAL_NAME", $portalName);
-define("PORTAL_URL", "http://www.bymurdock.com/scrumban/");
+define("PORTAL_URL", "http://www.scrumtasks.com/");
 define("PORTAL_MAIL", "mgiraldo@gmail.com");
 define("LOG_FOLDER", "log");
 ?>

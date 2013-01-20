@@ -1,11 +1,10 @@
 <?
 // ###################################################################
 // phpEXelerator v.3.3
-// Dating Portal Framework v.1.0
 // This software was designed to manage dating sites only, is not
 // intended to promote, sell or market any kind of sexual solicitation
 // of any kind or to exploit of any form sexual activities.
-// (R) 2005-2012
+// (R) 2005-2013
 // ###################################################################
 // Start application configuration
 
@@ -25,7 +24,7 @@ define("SECURE", false);
 define("LOG", true);
 define("VERBOSE", false);
 define("VISUAL_ERRORS", false);
-define("ROOT","/home/bionet/www/scrumban/");
+define("ROOT","/var/chroot/home/content/74/10352174/html/");
 
 if ($_SERVER['HTTPS'] != "on" && SECURE) {
     $redirect = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

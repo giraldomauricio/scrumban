@@ -23,6 +23,8 @@ class github {
     var $action = "";
     var $obj;
     var $raw;
+    var $username = "";
+    var $password = "";
 
     public function github($owner, $repo) {
         $this->owner = $owner;
@@ -41,6 +43,7 @@ class github {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        if($this->username != "" && $this->password != "") curl_setopt($ch, CURLOPT_USERPWD, $this->username.":".$this->password);
         if ($this->action != "")
             curl_setopt($ch, CURLOPT_POSTFIELDS, "/" . $this->action);
         $this->raw = curl_exec($ch);
@@ -56,7 +59,7 @@ class github {
 
         $path = ROOT."git_repos/temp.zip";
 
-        print $path . "<br />";
+        print "<ul><li>Saving latest repository to ".$path . "</li>";
 
         $fp = fopen($path, 'w');
 
@@ -66,7 +69,7 @@ class github {
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FILE, $fp);
-
+        if($this->username != "" && $this->password != "") curl_setopt($ch, CURLOPT_USERPWD, $this->username.":".$this->password);
         $data = curl_exec($ch);
 
         curl_close($ch);
@@ -74,12 +77,14 @@ class github {
 
         $sha = $this->loadLastCommitSha();
 
-        print "Saving to ".$sha."<br />";
+        print "<li>Version (sha): ".$sha."<li />";
+        
+        print "<li>Saving zip contents to to ".$sha."<li />";
         
         $zip = new ZipArchive;
         $res = $zip->open($path);
         if ($res === TRUE) {
-            print "Extracting to ".$sha."<br />";
+            print "<li>Extracting to ".$sha."<li />";
             $zip->extractTo(ROOT."git_repos/".$sha);
             $zip->close();
             $dir = dir(ROOT."git_repos/".$sha);
@@ -92,21 +97,20 @@ class github {
             }
             if($branch != "")
             {
-                print "Moving ".$branch." to ".$sha."<br />";
+                print "<li>Moving branch '".$branch."' to '".$sha."'<li />";
                 rename(ROOT."git_repos/".$sha."/".$branch, ROOT.$sha);
-                
                 $filename = ROOT."shaversion.php";
+                print "<li>Writing version controller. <li />";
                 $shaversion = "<"."? $"."shaversion = \"".$sha."\";?".">";
                 $handle = fopen($filename, "w");
                 fwrite($handle, $shaversion);
-                print "New version written <br />";
+                print "<li>New version written <li />";
             }
             
         } else {
-            echo 'Error expanding GIT Repository';
+            echo '<li>Error expanding GIT Repository</li>';
         }
-
-
+        print "</ul>";
         print_r(error_get_last());
     }
 
